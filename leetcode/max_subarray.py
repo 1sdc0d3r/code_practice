@@ -4,23 +4,17 @@ Given an integer array nums, find the contiguous subarray (containing at least o
 
 
 def maxSubArray(nums):
-    max = -100000
-    if len(nums) < 2:
-        print("single")
-        return sum(nums)
-    if len(nums) == 2:
-        for n in nums:
-            if n > max:
-                max = n
-    for i in range(len(nums)):
-        for j in range(len(nums)-1):
-            print(nums[i:j])
-            if(sum(nums[i:j])) > max:
-                max = sum(nums[i:j])
+    ans = nums[0]
+    subarr_sum = nums[0]
 
-    return max
+    for i in range(1, len(nums)):
+        subarr_sum = max(nums[i], nums[i] + subarr_sum)
+        if subarr_sum > ans:
+            ans = subarr_sum
+
+    return ans
 
 
-# print(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]))  # 6
-# print(maxSubArray([-2, 1]))  # 1
+print(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]))  # 6
+print(maxSubArray([-2, 1]))  # 1
 print(maxSubArray([-2, -1]))  # -1
